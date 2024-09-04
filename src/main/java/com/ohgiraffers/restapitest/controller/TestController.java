@@ -5,21 +5,35 @@ import com.ohgiraffers.restapitest.domain.entity.TestEntity;
 import com.ohgiraffers.restapitest.service.TestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/post")
 @Slf4j
 @RequiredArgsConstructor
 public class TestController {
 
     private final TestService testService;
+
+    // 게시글 전체 조회
+    @GetMapping("/posts")
+    public ResponseEntity<List<TestEntity>> findAllPosts(){
+
+        List<TestEntity> posts = testService.findAllPosts();
+
+        return ResponseEntity.ok(posts);
+    }
+
 
     // 게시글 등록
     @PostMapping("")
