@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity(name = "post")
-@Table(name = "post")
+@Table(name = "Post")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -15,13 +15,12 @@ public class TestEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "post_id")
     private int postId;
 
-    @Column(name = "Title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "Content")
+    @Column(name = "content")
     private String content;
-
 }

@@ -21,7 +21,7 @@ public class SwaggerConfig {
 
     private Info swaggerInfo(){
         return new Info()
-                .title("")
+                .title("꾸러기 로켓단의 api test!")
                 .description("SpringBoot Swagger 연동")
                 .version("1.0.0");
     }
