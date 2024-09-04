@@ -3,6 +3,7 @@ package com.ohgiraffers.restapitest.service;
 import com.ohgiraffers.restapitest.domain.dto.TestDTO;
 import com.ohgiraffers.restapitest.domain.entity.TestEntity;
 import com.ohgiraffers.restapitest.repository.TestRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,17 +36,17 @@ public class TestService {
     }
 
     // 게시글 수정
-    public void updatePost(int postId, TestDTO modifyInfo) {
+    public TestEntity updatePost(int postId, TestDTO modifyInfo) {
 
         TestEntity post= testRepository.findById(postId)
-                .orElseThrow();
+                .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다. postId: " + postId));
 
         post = post.toBuilder()
                 .title(modifyInfo.getTitle())
                 .content(modifyInfo.getContent())
                 .build();
 
-        testRepository.save(post);
+        return testRepository.save(post);
     }
 
     // 게시글 삭제
