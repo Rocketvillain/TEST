@@ -1,5 +1,7 @@
 package com.ohgiraffers.restapitest.controller;
 
+import com.ohgiraffers.restapitest.domain.dto.TestDTO;
+import com.ohgiraffers.restapitest.domain.entity.TestEntity;
 import com.ohgiraffers.restapitest.service.TestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -8,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
@@ -16,6 +20,18 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
 
     private final TestService testService;
+
+    // 게시글 등록
+    @PostMapping("")
+    public ResponseEntity<?> regist(@RequestBody TestDTO testDTO) {
+
+        TestEntity savedTest =  testService.registPost(testDTO);
+
+        return ResponseEntity
+                .created(URI.create("/posts/" + savedTest.getPostId()))
+                .body(savedTest);
+    }
+
 
     // 게시글 삭제
     @Operation(summary = "게시글 삭제")
@@ -30,5 +46,6 @@ public class TestController {
 
     return ResponseEntity.noContent().build();
     }
+
 
 }
