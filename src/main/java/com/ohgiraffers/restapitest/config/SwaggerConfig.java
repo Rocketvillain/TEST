@@ -1,5 +1,8 @@
 package com.ohgiraffers.restapitest.config;
 
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -8,19 +11,19 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class SwaggerConfig {
 
-    // http://localhost:8080/swagger-ui/index.html
     @Bean
-    public OpenAPI openAPI() {
+    public OpenAPI openAPI(){
 
         return new OpenAPI()
                 .components(new Components())
                 .info(swaggerInfo());
     }
 
-    private Info swaggerInfo() {
+    private Info swaggerInfo(){
         return new Info()
-                .title("JDH API")
-                .description("SpringBoot Swagger 연동테스트")
+                .title("")
+                .description("SpringBoot Swagger 연동")
                 .version("1.0.0");
     }
+
 }
