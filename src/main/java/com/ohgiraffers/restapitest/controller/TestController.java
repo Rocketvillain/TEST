@@ -1,6 +1,5 @@
 package com.ohgiraffers.restapitest.controller;
 
-import com.ohgiraffers.restapitest.domain.entity.TestEntity;
 import com.ohgiraffers.restapitest.service.TestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
