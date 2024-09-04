@@ -5,6 +5,7 @@ import com.ohgiraffers.restapitest.domain.entity.TestEntity;
 import com.ohgiraffers.restapitest.service.TestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ public class TestController {
     private final TestService testService;
 
     // 게시글 전체 조회
+    @Operation(summary = "게시글 전체 조회")
     @GetMapping("/posts")
     public ResponseEntity<List<TestEntity>> findAllPosts(){
 
@@ -37,6 +39,7 @@ public class TestController {
 
     // 게시글 등록
     @PostMapping("")
+    @Operation(summary = "게시글 등록")
     public ResponseEntity<?> regist(@RequestBody TestDTO testDTO) {
 
         TestEntity savedTest =  testService.registPost(testDTO);
