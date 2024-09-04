@@ -1,15 +1,14 @@
 package com.ohgiraffers.restapitest.service;
 
-import com.ohgiraffers.restapitest.domain.entity.TestEntity;
 import com.ohgiraffers.restapitest.domain.dto.TestDTO;
+import com.ohgiraffers.restapitest.domain.entity.TestEntity;
 import com.ohgiraffers.restapitest.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +32,20 @@ public class TestService {
         testEntity.setContent(testDTO.getContent());
 
         return testRepository.save(testEntity);
+    }
+
+    // 게시글 수정
+    public void updatePost(int postId, TestDTO modifyInfo) {
+
+        TestEntity post= testRepository.findById(postId)
+                .orElseThrow();
+
+        post = post.toBuilder()
+                .title(modifyInfo.getTitle())
+                .content(modifyInfo.getContent())
+                .build();
+
+        testRepository.save(post);
     }
 
     // 게시글 삭제
