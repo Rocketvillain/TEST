@@ -28,7 +28,7 @@ public class TestController {
 
     // 게시글 전체 조회
     @Operation(summary = "게시글 전체 조회")
-    @GetMapping("/posts")
+    @GetMapping("")
     public ResponseEntity<List<TestEntity>> findAllPosts(){
 
         List<TestEntity> posts = testService.findAllPosts();
