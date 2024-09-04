@@ -24,4 +24,9 @@ public class TestService {
 
         return testRepository.save(testEntity);
     }
+
+    public void deletePostById(int postId) {
+
+        testRepository.deleteById(postId);
+    }
 }

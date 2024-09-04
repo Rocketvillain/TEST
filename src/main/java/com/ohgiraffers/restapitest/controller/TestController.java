@@ -3,11 +3,13 @@ package com.ohgiraffers.restapitest.controller;
 import com.ohgiraffers.restapitest.domain.dto.TestDTO;
 import com.ohgiraffers.restapitest.domain.entity.TestEntity;
 import com.ohgiraffers.restapitest.service.TestService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.URI;
 import java.util.List;
 
@@ -19,22 +21,7 @@ public class TestController {
 
     private final TestService testService;
 
-
-//    @PostMapping("")
-//    public ResponseEntity<?> regist(@RequestParam String title, @RequestParam String content) {
-//
-//        log.info(title);
-//        log.info(content);
-//
-//        TestDTO createPost = new TestDTO(title, content);
-//
-//        TestEntity savedTest =  testService.registPost(createPost);
-//
-//        return ResponseEntity
-//                .created(URI.create("/posts/" + savedTest.getPostId()))
-//                .body(savedTest);
-//    }
-
+    // 게시글 등록
     @PostMapping("")
     public ResponseEntity<?> regist(@RequestBody TestDTO testDTO) {
 
@@ -44,5 +31,21 @@ public class TestController {
                 .created(URI.create("/posts/" + savedTest.getPostId()))
                 .body(savedTest);
     }
+
+
+    // 게시글 삭제
+    @Operation(summary = "게시글 삭제")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "게시글 삭제 성공!"),
+            @ApiResponse(responseCode = "400", description = "잘못 입력된 파라미터")
+    })
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<?> deletePost(@PathVariable int postId) {
+
+    testService.deletePostById(postId);
+
+    return ResponseEntity.noContent().build();
+    }
+
 
 }
