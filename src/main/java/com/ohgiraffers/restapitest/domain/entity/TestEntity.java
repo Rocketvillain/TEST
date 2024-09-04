@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
+@Builder(toBuilder = true)
 @ToString
 public class TestEntity {
 
@@ -19,10 +19,9 @@ public class TestEntity {
     private int postId;
 
     @Column(name = "Title")
-    private String Title;
+    private String title;
 
     @Column(name = "Content")
-    private String Content;
+    private String content;
 
-//
 }
