@@ -1,9 +1,9 @@
-package com.ohgiraffers.restapitest.controller;
+package com.ohgiraffers.restapitest.post.controller;
 
 import com.ohgiraffers.restapitest.common.ResponseMessage;
-import com.ohgiraffers.restapitest.domain.dto.TestDTO;
-import com.ohgiraffers.restapitest.domain.entity.TestEntity;
-import com.ohgiraffers.restapitest.service.TestService;
+import com.ohgiraffers.restapitest.post.domain.dto.PostDTO;
+import com.ohgiraffers.restapitest.post.domain.entity.PostEntity;
+import com.ohgiraffers.restapitest.post.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -29,16 +29,16 @@ import java.util.Map;
 @RequestMapping("/posts")
 @Slf4j
 @RequiredArgsConstructor
-public class TestController {
+public class PostController {
 
-    private final TestService testService;
+    private final PostService postService;
 
     // 게시글 전체 조회
     @Operation(summary = "게시글 전체 조회")
     @GetMapping("")
     public ResponseEntity<ResponseMessage> findAllPosts() {
 
-        List<TestEntity> posts = testService.findAllPosts();
+        List<PostEntity> posts = postService.findAllPosts();
 
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("posts", posts);
@@ -51,9 +51,9 @@ public class TestController {
     // 게시글 등록
     @PostMapping("")
     @Operation(summary = "게시글 등록")
-    public ResponseEntity<ResponseMessage> regist(@RequestBody TestDTO testDTO) {
+    public ResponseEntity<ResponseMessage> regist(@RequestBody PostDTO postDTO) {
 
-        TestEntity savedTest = testService.registPost(testDTO);
+        PostEntity savedTest = postService.registPost(postDTO);
 
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("post", savedTest);
@@ -66,9 +66,9 @@ public class TestController {
     // post 수정
     @Operation(summary = "게시글 수정", description = "우리 사이트 게시글 수정")
     @PutMapping("/{postId}")
-    public ResponseEntity<ResponseMessage> modifyPost(@PathVariable int postId, @RequestBody TestDTO modifyInfo) {
+    public ResponseEntity<ResponseMessage> modifyPost(@PathVariable int postId, @RequestBody PostDTO modifyInfo) {
 
-        TestEntity updatedPost = testService.updatePost(postId, modifyInfo);
+        PostEntity updatedPost = postService.updatePost(postId, modifyInfo);
 
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("post", updatedPost);
@@ -87,7 +87,7 @@ public class TestController {
     @DeleteMapping("/{postId}")
     public ResponseEntity<ResponseMessage> deletePost(@PathVariable int postId) {
 
-        testService.deletePostById(postId);
+        postService.deletePostById(postId);
 
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("message", "게시글 삭제 성공");

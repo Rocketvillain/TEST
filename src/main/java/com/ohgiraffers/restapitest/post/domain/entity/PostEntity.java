@@ -1,7 +1,10 @@
-package com.ohgiraffers.restapitest.domain.entity;
+package com.ohgiraffers.restapitest.post.domain.entity;
 
+import com.ohgiraffers.restapitest.comment.domain.entity.CommentEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity(name = "post")
 @Table(name = "Post")
@@ -11,7 +14,7 @@ import lombok.*;
 @Setter
 @Builder(toBuilder = true)
 @ToString
-public class TestEntity {
+public class PostEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +26,7 @@ public class TestEntity {
 
     @Column(name = "content")
     private String content;
+
+    @OneToMany(mappedBy = "postId", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<CommentEntity> comment;
 }

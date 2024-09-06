@@ -1,4 +1,4 @@
-package com.ohgiraffers.restapitest.domain.dto;
+package com.ohgiraffers.restapitest.post.domain.dto;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class TestDTO {
+public class PostDTO {
 
     private String Title;
 
