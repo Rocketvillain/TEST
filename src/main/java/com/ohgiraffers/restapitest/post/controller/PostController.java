@@ -47,6 +47,18 @@ public class PostController {
                 .body(new ResponseMessage(HttpStatus.OK, "게시글 전체 조회 성공", responseMap));
     }
 
+    // 게시글 단일 조회
+    @Operation(summary = "게시글 단일 조회")
+    @GetMapping("/{postId}")
+    public ResponseEntity<ResponseMessage> findPostById(@PathVariable int postId) {
+        PostEntity post = postService.findPostById(postId); // 게시글 조회
+
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("post", post);
+
+        return ResponseEntity.ok()
+                .body(new ResponseMessage(HttpStatus.OK, "게시글 조회 성공", responseMap));
+    }
 
     // 게시글 등록
     @PostMapping("")
@@ -96,6 +108,9 @@ public class PostController {
                 .body(new ResponseMessage(HttpStatus.OK, "게시글 삭제 성공", responseMap));
 
     }
-
-
 }
+
+
+
+
+

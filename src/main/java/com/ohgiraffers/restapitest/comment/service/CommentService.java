@@ -66,10 +66,11 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-//    // 댓글 삭제
-//    public void deletePostById(int postId) {
-//
-//        commentRepository.deleteById(postId);
-//    }
+
+    // 댓글 삭제
+    public void deleteComment(int commentId) {
+            commentRepository.deleteById(commentId);
+        }
+    }
 
 }
