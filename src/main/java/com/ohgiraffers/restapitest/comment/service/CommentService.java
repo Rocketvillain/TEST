@@ -71,6 +71,5 @@ public class CommentService {
     public void deleteComment(int commentId) {
             commentRepository.deleteById(commentId);
         }
-    }
-
 }
+
