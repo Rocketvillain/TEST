@@ -1,4 +1,3 @@
-use testdb;
 
 DROP TABLE IF EXISTS `Post` CASCADE;
 
