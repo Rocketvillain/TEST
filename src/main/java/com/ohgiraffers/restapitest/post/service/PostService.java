@@ -2,6 +2,7 @@ package com.ohgiraffers.restapitest.post.service;
 
 import com.ohgiraffers.restapitest.post.domain.dto.PostDTO;
 import com.ohgiraffers.restapitest.post.domain.entity.PostEntity;
+import com.ohgiraffers.restapitest.post.exception.ResourceNotFoundException;
 import com.ohgiraffers.restapitest.post.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -23,6 +25,13 @@ public class PostService {
     public List<PostEntity> findAllPosts() {
         log.info("전체 게시글 조회 중...");
         return postRepository.findAll();
+    }
+
+    // 게시글 단일 조회
+    public PostEntity findPostById(int postId) {
+
+        return postRepository.findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException("게시글이 존재하지 않습니다."));
     }
 
     // 게시글 등록
@@ -54,5 +63,6 @@ public class PostService {
 
         postRepository.deleteById(postId);
     }
+
 
 }

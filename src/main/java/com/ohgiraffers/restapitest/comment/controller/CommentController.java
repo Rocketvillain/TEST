@@ -55,9 +55,6 @@ public class CommentController {
                 .body(new ResponseMessage(HttpStatus.OK, "모든 댓글들을 불러옵니다...", responseMap));
     }
 
-
-
-
     // 댓글 등록
     @PostMapping("")
     @Operation(summary = "댓글 등록")
@@ -73,39 +70,16 @@ public class CommentController {
                 .body(new ResponseMessage(HttpStatus.CREATED, savedComment.getPostId().getPostId()+"번 게시글의 댓글 등록 성공~!", responseMap));
     }
 
-//    // post 수정
-//    @Operation(summary = "댓글 수정", description = "우리 사이트 댓글 수정")
-//    @PutMapping("/{postId}")
-//    public ResponseEntity<ResponseMessage> modifyPost(@PathVariable int postId, @RequestBody CommentDTO modifyInfo) {
-//
-//        CommentEntity updatedPost = commentService.updatePost(postId, modifyInfo);
-//
-//        Map<String, Object> responseMap = new HashMap<>();
-//        responseMap.put("post", updatedPost);
-//
-//        return ResponseEntity.created(URI.create("/entity/TestEntity/" + postId))
-//                .body(new ResponseMessage(HttpStatus.OK, "댓글 수정 성공", responseMap));
-//    }
-//
-//    // 댓글 삭제
-//    @Operation(summary = "댓글 삭제")
-//    @ApiResponses({
-//            @ApiResponse(responseCode = "200", description = "댓글 삭제 성공!"),
-//            //  204 No Content 대신 200 OK를 사용하여 본문에 메시지를 포함할 수 있게 했다.
-//            @ApiResponse(responseCode = "400", description = "잘못 입력된 파라미터")
-//    })
-//    @DeleteMapping("/{postId}")
-//    public ResponseEntity<ResponseMessage> deletePost(@PathVariable int postId) {
-//
-//        commentService.deletePostById(postId);
-//
-//        Map<String, Object> responseMap = new HashMap<>();
-//        responseMap.put("message", "댓글 삭제 성공");
-//
-//        return ResponseEntity.ok()
-//                .body(new ResponseMessage(HttpStatus.OK, "댓글 삭제 성공", responseMap));
-//
-//    }
 
+    // 댓글 삭제
+    @DeleteMapping("/{commentId}")
+    @Operation(summary = "댓글 삭제")
+    public ResponseEntity<ResponseMessage> deleteComment(@PathVariable int commentId) {
+        commentService.deleteComment(commentId);
+
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT) // 204 상태 코드 반환
+                .body(new ResponseMessage(HttpStatus.NO_CONTENT, "댓글 삭제 성공"));
+    }
 
 }
