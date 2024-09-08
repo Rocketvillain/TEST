@@ -1,3 +1,4 @@
+use testdb;
 
 ALTER TABLE comment DROP FOREIGN KEY FKs1slvnkuemjsq2kj4h3vhx7i1;
 
