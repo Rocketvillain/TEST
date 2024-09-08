@@ -52,20 +52,20 @@ public class CommentService {
         return commentRepository.save(commentEntity);
     }
 
-//    // 댓글 수정
-//    public CommentEntity updatePost(int postId, CommentDTO modifyInfo) {
-//
-//        CommentEntity post= commentRepository.findById(postId)
-//                .orElseThrow(() -> new EntityNotFoundException("댓글을 찾을 수 없습니다. postId: " + postId));
-//
-//        post = post.toBuilder()
-//                .title(modifyInfo.getTitle())
-//                .content(modifyInfo.getContent())
-//                .build();
-//
-//        return commentRepository.save(post);
-//    }
-//
+    // 댓글 수정
+    public CommentEntity updateComment(int commentId, CommentDTO modifyInfo) {
+
+        CommentEntity comment= commentRepository.findById(commentId)
+                .orElseThrow(() -> new EntityNotFoundException("댓글을 찾을 수 없습니다. comment: " + commentId));
+
+        comment = comment.toBuilder()
+                .postId(modifyInfo.getPostId())
+                .content(modifyInfo.getContent())
+                .build();
+
+        return commentRepository.save(comment);
+    }
+
 //    // 댓글 삭제
 //    public void deletePostById(int postId) {
 //
