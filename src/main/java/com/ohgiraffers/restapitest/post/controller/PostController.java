@@ -85,7 +85,7 @@ public class PostController {
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("post", updatedPost);
 
-        return ResponseEntity.created(URI.create("/entity/TestEntity/" + postId))
+        return ResponseEntity.created(URI.create("/entity/PostEntity/" + postId))
                 .body(new ResponseMessage(HttpStatus.OK, "게시글 수정 성공", responseMap));
     }
 

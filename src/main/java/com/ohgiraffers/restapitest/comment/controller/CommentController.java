@@ -70,6 +70,20 @@ public class CommentController {
                 .body(new ResponseMessage(HttpStatus.CREATED, savedComment.getPostId().getPostId()+"번 게시글의 댓글 등록 성공~!", responseMap));
     }
 
+    // post 수정
+    @Operation(summary = "댓글 수정", description = "우리 사이트 댓글 수정")
+    @PutMapping("/{commentId}")
+    public ResponseEntity<ResponseMessage> modifyPost(@PathVariable int commentId, @RequestBody CommentDTO modifyInfo) {
+
+        CommentEntity updatedComment = commentService.updateComment(commentId, modifyInfo);
+
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("comment", updatedComment);
+
+        return ResponseEntity.created(URI.create("/entity/CommentEntity/" + commentId))
+                .body(new ResponseMessage(HttpStatus.OK, "댓글 수정 성공", responseMap));
+    }
+
 
     // 댓글 삭제
     @DeleteMapping("/{commentId}")
