@@ -1,5 +1,7 @@
 use testdb;
 
+ALTER TABLE comment DROP FOREIGN KEY FKs1slvnkuemjsq2kj4h3vhx7i1;
+
 DROP TABLE IF EXISTS `Post` CASCADE;
 
 CREATE TABLE `Post`
